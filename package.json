@@ -1,0 +1,10 @@
+{
+  "name": "@djgrant/react-tailwind",
+  "version": "0.1.0",
+  "license": "MIT",
+  "main": "src/index.js",
+  "dependencies": {
+    "react": "^16.13.1",
+    "tailwindcss-classnames": "^1.4.1"
+  }
+}
