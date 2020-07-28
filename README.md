@@ -16,6 +16,8 @@ const Button = styled.button((props) => [
     default: ["text-sm", "py-2", "px-3"],
   }),
 ]);
+
+<Button size="lg">Submit</Button>;
 ```
 
 ## Install
