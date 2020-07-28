@@ -1,6 +1,8 @@
 # react-tailwind
 
-Build React components using [tailwindcss][tw] and a [styled-components][sc] like API.
+Build React components using [tailwindcss][tw] and a clean, functional API.
+
+Inspired by [styled-components][sc] and [classnames][cn].
 
 ```js
 import { tw, switchcase } from "@djgrant/react-tailwind";
@@ -23,3 +25,5 @@ npm install @djgrant/react-tailwind
 ```
 
 [tw]: https://tailwindcss.com
+[sc]: https://styled-components.com
+[cn]: https://www.npmjs.com/package/classnames

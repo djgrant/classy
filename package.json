@@ -2,6 +2,7 @@
   "name": "@djgrant/react-tailwind",
   "version": "1.0.0-alpha.1",
   "license": "MIT",
+  "repository": "github:djgrant/components",
   "main": "src/index.js",
   "dependencies": {
     "react": "^16.13.1",
