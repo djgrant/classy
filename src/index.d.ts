@@ -41,7 +41,7 @@ type TwMapper<Props> = (props: Props) => TwClassnamesArgs;
 type TwComponent<TProps> = React.FC<TProps>;
 
 interface TwComponentFactory<Props> {
-  <ExtraProps = {}>(...arg: Args<Props & ExtraProps>): TwComponent<
+  <ExtraProps = {}>(...args: Args<Props & ExtraProps>): TwComponent<
     Props & ExtraProps
   >;
 }
