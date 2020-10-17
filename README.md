@@ -7,7 +7,7 @@ Inspired by [styled-components][sc] and [classnames][cn].
 ```js
 import { tw, switchcase } from "@djgrant/react-tailwind";
 
-const Button = styled.button((props) => [
+const Button = tw.button((props) => [
   "font-semibold",
   "rounded",
   switchcase(size, {
