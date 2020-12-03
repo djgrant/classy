@@ -38,7 +38,7 @@ export interface Tw {
 
 type Args<Props> = TwClassnamesArgs[] | [TwMapper<Props>];
 type TwMapper<Props> = (props: Props) => TwClassnamesArgs;
-type TwComponent<TProps> = React.FC<TProps>;
+type TwComponent<TProps> = React.ForwardRefExoticComponent<TProps>;
 
 interface TwComponentFactory<Props> {
   <ExtraProps = {}>(...args: Args<Props & ExtraProps>): TwComponent<
