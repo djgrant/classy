@@ -1,6 +1,3 @@
-// import { TArgs, TClasses } from "tailwindcss-classnames";
-
-// tailwindcss-classnames types just kills the compiler so reverting to string
 type TwClassname<T extends string> =
   | T
   | undefined
