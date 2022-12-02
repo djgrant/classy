@@ -1,5 +1,5 @@
 import { forwardRef, createElement } from "react";
-import { classnames } from "classnames";
+import classnames from "classnames";
 import { tags } from "./tags";
 
 export const tw = (tag) => (...args) =>
