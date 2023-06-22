@@ -5,10 +5,12 @@
   "repository": "github:djgrant/classy",
   "license": "MIT",
   "main": "./dist/index.js",
+  "types": "./src/index.d.ts",
   "module": "./src/index.js",
   "exports": {
     "import": "./src/index.js",
-    "default": "./dist/index.js"
+    "default": "./dist/index.js",
+    "types": "./src/index.d.ts"
   },
   "scripts": {
     "prepare": "esbuild src/index.js --bundle --platform=neutral --target=esnext --format=cjs --packages=external --outfile=dist/index.js"
