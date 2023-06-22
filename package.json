@@ -12,6 +12,10 @@
     "default": "./dist/index.js",
     "types": "./src/index.d.ts"
   },
+  "files": [
+    "src",
+    "dist"
+  ],
   "scripts": {
     "prepare": "esbuild src/index.js --bundle --platform=neutral --target=esnext --format=cjs --packages=external --outfile=dist/index.js"
   },
