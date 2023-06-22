@@ -1,12 +1,14 @@
 # classy
 
-A functional API for creating React components styled with CSS classes.
+Turn CSS classes into interactive React components.
 
-- Tames and organises long sets of CSS classes (e.g. [tailwindcss][tw])
+## Features
+
+- Tames long sets of CSS classes e.g. [tailwindcss][tw]
 - Produces typed and extensible components
 - Handles prop interpolations and transient props
-- Backwards compatible with [clsx][clsx]
-- Create variants with FP utilities
+- Provides FP-style utilities to generate component variants etc.
+- Backwards compatible with [clsx][clsx] and [classnames][cn]
 - Small and fast
 
 ## Getting Started
