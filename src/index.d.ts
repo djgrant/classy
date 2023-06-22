@@ -26,7 +26,7 @@ export interface Classy {
     tag: Tag
   ): CreateClassyIntrinsicComponentFactory<Tag>;
 
-  classNames: (...args: ClassNamesArgs[]) => string;
+  string: (...args: ClassNamesArgs[]) => string;
 }
 
 type Args<Props> = ClassNamesArgs[] | [ClassyMapper<Props>];
