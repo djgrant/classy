@@ -1,6 +1,6 @@
 import { forwardRef, createElement } from "react";
 import clsx from "clsx";
-import { tags } from "./tags";
+import { tags } from "./tags.js";
 
 export const classy =
   (tag) =>
