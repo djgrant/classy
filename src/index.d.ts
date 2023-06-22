@@ -1,204 +1,198 @@
-type TwClassname<T extends string> =
+type ClassName<T extends string> =
   | T
   | undefined
   | null
   | { [key in T]?: boolean }
-  | TwClassname<T>[];
+  | ClassName<T>[];
 
-type TwClassnamesArgs = TwClassname<string> | TwClassname<string>[];
+type ClassNamesArgs = ClassName<string> | ClassName<string>[];
 
-export const ifElse: <T = TwClassnamesArgs>(
-  target: any,
-  left: T,
-  right?: T
-) => T;
+export const ifElse: <T = ClassNamesArgs>(target: any, left: T, right?: T) => T;
 
-export const switchcase: <T = TwClassnamesArgs>(
+export const switchCase: <T = ClassNamesArgs>(
   target: any,
   matcher: Record<string, T>
 ) => T;
 
-declare const tw: Tw;
+declare const classy: Classy;
 
-export interface Tw extends TwTags {}
-export interface Tw {
+export interface Classy extends ClassyTags {}
+export interface Classy {
   <Tag extends React.ComponentType<any>>(
     tag: Tag
-  ): CreateTwExtrinsicComponentFactory<Tag>;
+  ): CreateClassyExtrinsicComponentFactory<Tag>;
 
   <Tag extends keyof JSX.IntrinsicElements>(
     tag: Tag
-  ): CreateTwIntrisicComponentFactory<Tag>;
+  ): CreateClassyIntrinsicComponentFactory<Tag>;
 
-  classnames: (...args: TwClassnamesArgs[]) => string;
+  classNames: (...args: ClassNamesArgs[]) => string;
 }
 
-type Args<Props> = TwClassnamesArgs[] | [TwMapper<Props>];
-type TwMapper<Props> = (props: Props) => TwClassnamesArgs;
-type TwComponent<TProps> = React.ForwardRefExoticComponent<TProps>;
+type Args<Props> = ClassNamesArgs[] | [ClassyMapper<Props>];
+type ClassyMapper<Props> = (props: Props) => ClassNamesArgs;
+type ClassyComponent<TProps> = React.ForwardRefExoticComponent<TProps>;
 
-interface TwComponentFactory<Props> {
-  <ExtraProps = {}>(...args: Args<Props & ExtraProps>): TwComponent<
+interface ClassyComponentFactory<Props> {
+  <ExtraProps = {}>(...args: Args<Props & ExtraProps>): ClassyComponent<
     Props & ExtraProps
   >;
 }
 
-type CreateTwExtrinsicComponentFactory<
+type CreateClassyExtrinsicComponentFactory<
   Tag extends React.ComponentType<any>
-> = TwComponentFactory<PropsOf<Tag>>;
+> = ClassyComponentFactory<PropsOf<Tag>>;
 
-type CreateTwIntrisicComponentFactory<
+type CreateClassyIntrinsicComponentFactory<
   Tag extends keyof JSX.IntrinsicElements
-> = TwComponentFactory<JSX.IntrinsicElements[Tag]>;
+> = ClassyComponentFactory<JSX.IntrinsicElements[Tag]>;
 
-// :) https://github.com/emotion-js/emotion/blob/master/packages/styled-base/types/helper.d.ts
 type PropsOf<
   C extends keyof JSX.IntrinsicElements | React.JSXElementConstructor<any>
 > = JSX.LibraryManagedAttributes<C, React.ComponentPropsWithRef<C>>;
 
-// :) https://github.com/emotion-js/emotion/blob/master/packages/styled/types/index.d.ts
-interface TwTags {
-  a: CreateTwIntrisicComponentFactory<"a">;
-  abbr: CreateTwIntrisicComponentFactory<"abbr">;
-  address: CreateTwIntrisicComponentFactory<"address">;
-  area: CreateTwIntrisicComponentFactory<"area">;
-  article: CreateTwIntrisicComponentFactory<"article">;
-  aside: CreateTwIntrisicComponentFactory<"aside">;
-  audio: CreateTwIntrisicComponentFactory<"audio">;
-  b: CreateTwIntrisicComponentFactory<"b">;
-  base: CreateTwIntrisicComponentFactory<"base">;
-  bdi: CreateTwIntrisicComponentFactory<"bdi">;
-  bdo: CreateTwIntrisicComponentFactory<"bdo">;
-  big: CreateTwIntrisicComponentFactory<"big">;
-  blockquote: CreateTwIntrisicComponentFactory<"blockquote">;
-  body: CreateTwIntrisicComponentFactory<"body">;
-  br: CreateTwIntrisicComponentFactory<"br">;
-  button: CreateTwIntrisicComponentFactory<"button">;
-  canvas: CreateTwIntrisicComponentFactory<"canvas">;
-  caption: CreateTwIntrisicComponentFactory<"caption">;
-  cite: CreateTwIntrisicComponentFactory<"cite">;
-  code: CreateTwIntrisicComponentFactory<"code">;
-  col: CreateTwIntrisicComponentFactory<"col">;
-  colgroup: CreateTwIntrisicComponentFactory<"colgroup">;
-  data: CreateTwIntrisicComponentFactory<"data">;
-  datalist: CreateTwIntrisicComponentFactory<"datalist">;
-  dd: CreateTwIntrisicComponentFactory<"dd">;
-  del: CreateTwIntrisicComponentFactory<"del">;
-  details: CreateTwIntrisicComponentFactory<"details">;
-  dfn: CreateTwIntrisicComponentFactory<"dfn">;
-  dialog: CreateTwIntrisicComponentFactory<"dialog">;
-  div: CreateTwIntrisicComponentFactory<"div">;
-  dl: CreateTwIntrisicComponentFactory<"dl">;
-  dt: CreateTwIntrisicComponentFactory<"dt">;
-  em: CreateTwIntrisicComponentFactory<"em">;
-  embed: CreateTwIntrisicComponentFactory<"embed">;
-  fieldset: CreateTwIntrisicComponentFactory<"fieldset">;
-  figcaption: CreateTwIntrisicComponentFactory<"figcaption">;
-  figure: CreateTwIntrisicComponentFactory<"figure">;
-  footer: CreateTwIntrisicComponentFactory<"footer">;
-  form: CreateTwIntrisicComponentFactory<"form">;
-  h1: CreateTwIntrisicComponentFactory<"h1">;
-  h2: CreateTwIntrisicComponentFactory<"h2">;
-  h3: CreateTwIntrisicComponentFactory<"h3">;
-  h4: CreateTwIntrisicComponentFactory<"h4">;
-  h5: CreateTwIntrisicComponentFactory<"h5">;
-  h6: CreateTwIntrisicComponentFactory<"h6">;
-  head: CreateTwIntrisicComponentFactory<"head">;
-  header: CreateTwIntrisicComponentFactory<"header">;
-  hgroup: CreateTwIntrisicComponentFactory<"hgroup">;
-  hr: CreateTwIntrisicComponentFactory<"hr">;
-  html: CreateTwIntrisicComponentFactory<"html">;
-  i: CreateTwIntrisicComponentFactory<"i">;
-  iframe: CreateTwIntrisicComponentFactory<"iframe">;
-  img: CreateTwIntrisicComponentFactory<"img">;
-  input: CreateTwIntrisicComponentFactory<"input">;
-  ins: CreateTwIntrisicComponentFactory<"ins">;
-  kbd: CreateTwIntrisicComponentFactory<"kbd">;
-  keygen: CreateTwIntrisicComponentFactory<"keygen">;
-  label: CreateTwIntrisicComponentFactory<"label">;
-  legend: CreateTwIntrisicComponentFactory<"legend">;
-  li: CreateTwIntrisicComponentFactory<"li">;
-  link: CreateTwIntrisicComponentFactory<"link">;
-  main: CreateTwIntrisicComponentFactory<"main">;
-  map: CreateTwIntrisicComponentFactory<"map">;
-  mark: CreateTwIntrisicComponentFactory<"mark">;
+interface ClassyTags {
+  a: CreateClassyIntrinsicComponentFactory<"a">;
+  abbr: CreateClassyIntrinsicComponentFactory<"abbr">;
+  address: CreateClassyIntrinsicComponentFactory<"address">;
+  area: CreateClassyIntrinsicComponentFactory<"area">;
+  article: CreateClassyIntrinsicComponentFactory<"article">;
+  aside: CreateClassyIntrinsicComponentFactory<"aside">;
+  audio: CreateClassyIntrinsicComponentFactory<"audio">;
+  b: CreateClassyIntrinsicComponentFactory<"b">;
+  base: CreateClassyIntrinsicComponentFactory<"base">;
+  bdi: CreateClassyIntrinsicComponentFactory<"bdi">;
+  bdo: CreateClassyIntrinsicComponentFactory<"bdo">;
+  big: CreateClassyIntrinsicComponentFactory<"big">;
+  blockquote: CreateClassyIntrinsicComponentFactory<"blockquote">;
+  body: CreateClassyIntrinsicComponentFactory<"body">;
+  br: CreateClassyIntrinsicComponentFactory<"br">;
+  button: CreateClassyIntrinsicComponentFactory<"button">;
+  canvas: CreateClassyIntrinsicComponentFactory<"canvas">;
+  caption: CreateClassyIntrinsicComponentFactory<"caption">;
+  cite: CreateClassyIntrinsicComponentFactory<"cite">;
+  code: CreateClassyIntrinsicComponentFactory<"code">;
+  col: CreateClassyIntrinsicComponentFactory<"col">;
+  colgroup: CreateClassyIntrinsicComponentFactory<"colgroup">;
+  data: CreateClassyIntrinsicComponentFactory<"data">;
+  datalist: CreateClassyIntrinsicComponentFactory<"datalist">;
+  dd: CreateClassyIntrinsicComponentFactory<"dd">;
+  del: CreateClassyIntrinsicComponentFactory<"del">;
+  details: CreateClassyIntrinsicComponentFactory<"details">;
+  dfn: CreateClassyIntrinsicComponentFactory<"dfn">;
+  dialog: CreateClassyIntrinsicComponentFactory<"dialog">;
+  div: CreateClassyIntrinsicComponentFactory<"div">;
+  dl: CreateClassyIntrinsicComponentFactory<"dl">;
+  dt: CreateClassyIntrinsicComponentFactory<"dt">;
+  em: CreateClassyIntrinsicComponentFactory<"em">;
+  embed: CreateClassyIntrinsicComponentFactory<"embed">;
+  fieldset: CreateClassyIntrinsicComponentFactory<"fieldset">;
+  figcaption: CreateClassyIntrinsicComponentFactory<"figcaption">;
+  figure: CreateClassyIntrinsicComponentFactory<"figure">;
+  footer: CreateClassyIntrinsicComponentFactory<"footer">;
+  form: CreateClassyIntrinsicComponentFactory<"form">;
+  h1: CreateClassyIntrinsicComponentFactory<"h1">;
+  h2: CreateClassyIntrinsicComponentFactory<"h2">;
+  h3: CreateClassyIntrinsicComponentFactory<"h3">;
+  h4: CreateClassyIntrinsicComponentFactory<"h4">;
+  h5: CreateClassyIntrinsicComponentFactory<"h5">;
+  h6: CreateClassyIntrinsicComponentFactory<"h6">;
+  head: CreateClassyIntrinsicComponentFactory<"head">;
+  header: CreateClassyIntrinsicComponentFactory<"header">;
+  hgroup: CreateClassyIntrinsicComponentFactory<"hgroup">;
+  hr: CreateClassyIntrinsicComponentFactory<"hr">;
+  html: CreateClassyIntrinsicComponentFactory<"html">;
+  i: CreateClassyIntrinsicComponentFactory<"i">;
+  iframe: CreateClassyIntrinsicComponentFactory<"iframe">;
+  img: CreateClassyIntrinsicComponentFactory<"img">;
+  input: CreateClassyIntrinsicComponentFactory<"input">;
+  ins: CreateClassyIntrinsicComponentFactory<"ins">;
+  kbd: CreateClassyIntrinsicComponentFactory<"kbd">;
+  keygen: CreateClassyIntrinsicComponentFactory<"keygen">;
+  label: CreateClassyIntrinsicComponentFactory<"label">;
+  legend: CreateClassyIntrinsicComponentFactory<"legend">;
+  li: CreateClassyIntrinsicComponentFactory<"li">;
+  link: CreateClassyIntrinsicComponentFactory<"link">;
+  main: CreateClassyIntrinsicComponentFactory<"main">;
+  map: CreateClassyIntrinsicComponentFactory<"map">;
+  mark: CreateClassyIntrinsicComponentFactory<"mark">;
   /**
    * @desc
    * marquee tag is not supported by @types/react
    */
-  // 'marquee': CreateTwIntrisicComponentFactory<'marquee';
-  menu: CreateTwIntrisicComponentFactory<"menu">;
-  menuitem: CreateTwIntrisicComponentFactory<"menuitem">;
-  meta: CreateTwIntrisicComponentFactory<"meta">;
-  meter: CreateTwIntrisicComponentFactory<"meter">;
-  nav: CreateTwIntrisicComponentFactory<"nav">;
-  noscript: CreateTwIntrisicComponentFactory<"noscript">;
-  object: CreateTwIntrisicComponentFactory<"object">;
-  ol: CreateTwIntrisicComponentFactory<"ol">;
-  optgroup: CreateTwIntrisicComponentFactory<"optgroup">;
-  option: CreateTwIntrisicComponentFactory<"option">;
-  output: CreateTwIntrisicComponentFactory<"output">;
-  p: CreateTwIntrisicComponentFactory<"p">;
-  param: CreateTwIntrisicComponentFactory<"param">;
-  picture: CreateTwIntrisicComponentFactory<"picture">;
-  pre: CreateTwIntrisicComponentFactory<"pre">;
-  progress: CreateTwIntrisicComponentFactory<"progress">;
-  q: CreateTwIntrisicComponentFactory<"q">;
-  rp: CreateTwIntrisicComponentFactory<"rp">;
-  rt: CreateTwIntrisicComponentFactory<"rt">;
-  ruby: CreateTwIntrisicComponentFactory<"ruby">;
-  s: CreateTwIntrisicComponentFactory<"s">;
-  samp: CreateTwIntrisicComponentFactory<"samp">;
-  script: CreateTwIntrisicComponentFactory<"script">;
-  section: CreateTwIntrisicComponentFactory<"section">;
-  select: CreateTwIntrisicComponentFactory<"select">;
-  small: CreateTwIntrisicComponentFactory<"small">;
-  source: CreateTwIntrisicComponentFactory<"source">;
-  span: CreateTwIntrisicComponentFactory<"span">;
-  strong: CreateTwIntrisicComponentFactory<"strong">;
-  style: CreateTwIntrisicComponentFactory<"style">;
-  sub: CreateTwIntrisicComponentFactory<"sub">;
-  summary: CreateTwIntrisicComponentFactory<"summary">;
-  sup: CreateTwIntrisicComponentFactory<"sup">;
-  table: CreateTwIntrisicComponentFactory<"table">;
-  tbody: CreateTwIntrisicComponentFactory<"tbody">;
-  td: CreateTwIntrisicComponentFactory<"td">;
-  textarea: CreateTwIntrisicComponentFactory<"textarea">;
-  tfoot: CreateTwIntrisicComponentFactory<"tfoot">;
-  th: CreateTwIntrisicComponentFactory<"th">;
-  thead: CreateTwIntrisicComponentFactory<"thead">;
-  time: CreateTwIntrisicComponentFactory<"time">;
-  title: CreateTwIntrisicComponentFactory<"title">;
-  tr: CreateTwIntrisicComponentFactory<"tr">;
-  track: CreateTwIntrisicComponentFactory<"track">;
-  u: CreateTwIntrisicComponentFactory<"u">;
-  ul: CreateTwIntrisicComponentFactory<"ul">;
-  var: CreateTwIntrisicComponentFactory<"var">;
-  video: CreateTwIntrisicComponentFactory<"video">;
-  wbr: CreateTwIntrisicComponentFactory<"wbr">;
+  // 'marquee': CreateClassyIntrinsicComponentFactory<'marquee';
+  menu: CreateClassyIntrinsicComponentFactory<"menu">;
+  menuitem: CreateClassyIntrinsicComponentFactory<"menuitem">;
+  meta: CreateClassyIntrinsicComponentFactory<"meta">;
+  meter: CreateClassyIntrinsicComponentFactory<"meter">;
+  nav: CreateClassyIntrinsicComponentFactory<"nav">;
+  noscript: CreateClassyIntrinsicComponentFactory<"noscript">;
+  object: CreateClassyIntrinsicComponentFactory<"object">;
+  ol: CreateClassyIntrinsicComponentFactory<"ol">;
+  optgroup: CreateClassyIntrinsicComponentFactory<"optgroup">;
+  option: CreateClassyIntrinsicComponentFactory<"option">;
+  output: CreateClassyIntrinsicComponentFactory<"output">;
+  p: CreateClassyIntrinsicComponentFactory<"p">;
+  param: CreateClassyIntrinsicComponentFactory<"param">;
+  picture: CreateClassyIntrinsicComponentFactory<"picture">;
+  pre: CreateClassyIntrinsicComponentFactory<"pre">;
+  progress: CreateClassyIntrinsicComponentFactory<"progress">;
+  q: CreateClassyIntrinsicComponentFactory<"q">;
+  rp: CreateClassyIntrinsicComponentFactory<"rp">;
+  rt: CreateClassyIntrinsicComponentFactory<"rt">;
+  ruby: CreateClassyIntrinsicComponentFactory<"ruby">;
+  s: CreateClassyIntrinsicComponentFactory<"s">;
+  samp: CreateClassyIntrinsicComponentFactory<"samp">;
+  script: CreateClassyIntrinsicComponentFactory<"script">;
+  section: CreateClassyIntrinsicComponentFactory<"section">;
+  select: CreateClassyIntrinsicComponentFactory<"select">;
+  small: CreateClassyIntrinsicComponentFactory<"small">;
+  source: CreateClassyIntrinsicComponentFactory<"source">;
+  span: CreateClassyIntrinsicComponentFactory<"span">;
+  strong: CreateClassyIntrinsicComponentFactory<"strong">;
+  style: CreateClassyIntrinsicComponentFactory<"style">;
+  sub: CreateClassyIntrinsicComponentFactory<"sub">;
+  summary: CreateClassyIntrinsicComponentFactory<"summary">;
+  sup: CreateClassyIntrinsicComponentFactory<"sup">;
+  table: CreateClassyIntrinsicComponentFactory<"table">;
+  tbody: CreateClassyIntrinsicComponentFactory<"tbody">;
+  td: CreateClassyIntrinsicComponentFactory<"td">;
+  textarea: CreateClassyIntrinsicComponentFactory<"textarea">;
+  tfoot: CreateClassyIntrinsicComponentFactory<"tfoot">;
+  th: CreateClassyIntrinsicComponentFactory<"th">;
+  thead: CreateClassyIntrinsicComponentFactory<"thead">;
+  time: CreateClassyIntrinsicComponentFactory<"time">;
+  title: CreateClassyIntrinsicComponentFactory<"title">;
+  tr: CreateClassyIntrinsicComponentFactory<"tr">;
+  track: CreateClassyIntrinsicComponentFactory<"track">;
+  u: CreateClassyIntrinsicComponentFactory<"u">;
+  ul: CreateClassyIntrinsicComponentFactory<"ul">;
+  var: CreateClassyIntrinsicComponentFactory<"var">;
+  video: CreateClassyIntrinsicComponentFactory<"video">;
+  wbr: CreateClassyIntrinsicComponentFactory<"wbr">;
 
   /**
    * @desc
    * SVG tags
    */
-  circle: CreateTwIntrisicComponentFactory<"circle">;
-  clipPath: CreateTwIntrisicComponentFactory<"clipPath">;
-  defs: CreateTwIntrisicComponentFactory<"defs">;
-  ellipse: CreateTwIntrisicComponentFactory<"ellipse">;
-  foreignObject: CreateTwIntrisicComponentFactory<"foreignObject">;
-  g: CreateTwIntrisicComponentFactory<"g">;
-  image: CreateTwIntrisicComponentFactory<"image">;
-  line: CreateTwIntrisicComponentFactory<"line">;
-  linearGradient: CreateTwIntrisicComponentFactory<"linearGradient">;
-  mask: CreateTwIntrisicComponentFactory<"mask">;
-  path: CreateTwIntrisicComponentFactory<"path">;
-  pattern: CreateTwIntrisicComponentFactory<"pattern">;
-  polygon: CreateTwIntrisicComponentFactory<"polygon">;
-  polyline: CreateTwIntrisicComponentFactory<"polyline">;
-  radialGradient: CreateTwIntrisicComponentFactory<"radialGradient">;
-  rect: CreateTwIntrisicComponentFactory<"rect">;
-  stop: CreateTwIntrisicComponentFactory<"stop">;
-  svg: CreateTwIntrisicComponentFactory<"svg">;
-  text: CreateTwIntrisicComponentFactory<"text">;
-  tspan: CreateTwIntrisicComponentFactory<"tspan">;
+  circle: CreateClassyIntrinsicComponentFactory<"circle">;
+  clipPath: CreateClassyIntrinsicComponentFactory<"clipPath">;
+  defs: CreateClassyIntrinsicComponentFactory<"defs">;
+  ellipse: CreateClassyIntrinsicComponentFactory<"ellipse">;
+  foreignObject: CreateClassyIntrinsicComponentFactory<"foreignObject">;
+  g: CreateClassyIntrinsicComponentFactory<"g">;
+  image: CreateClassyIntrinsicComponentFactory<"image">;
+  line: CreateClassyIntrinsicComponentFactory<"line">;
+  linearGradient: CreateClassyIntrinsicComponentFactory<"linearGradient">;
+  mask: CreateClassyIntrinsicComponentFactory<"mask">;
+  path: CreateClassyIntrinsicComponentFactory<"path">;
+  pattern: CreateClassyIntrinsicComponentFactory<"pattern">;
+  polygon: CreateClassyIntrinsicComponentFactory<"polygon">;
+  polyline: CreateClassyIntrinsicComponentFactory<"polyline">;
+  radialGradient: CreateClassyIntrinsicComponentFactory<"radialGradient">;
+  rect: CreateClassyIntrinsicComponentFactory<"rect">;
+  stop: CreateClassyIntrinsicComponentFactory<"stop">;
+  svg: CreateClassyIntrinsicComponentFactory<"svg">;
+  text: CreateClassyIntrinsicComponentFactory<"text">;
+  tspan: CreateClassyIntrinsicComponentFactory<"tspan">;
 }
