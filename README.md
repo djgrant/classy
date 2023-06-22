@@ -1,11 +1,12 @@
-# @djgrant/classy
+# classy
 
-Create fully-typed React components with CSS classes (e.g. [tailwindcss][tw]).
+A functional API for creating React components styled with CSS classes.
 
-- Tames long className strings
-- Produces extensible components
+- Tames and organises long sets of CSS classes (e.g. [tailwindcss][tw])
+- Produces typed and extensible components
 - Handles prop interpolations and transient props
-- Backwards compatible with [clsx][clsx] (only dependency)
+- Backwards compatible with [clsx][clsx]
+- Create variants with FP utilities
 - Small and fast
 
 ## Getting Started
