@@ -1,13 +1,13 @@
 # classy
 
-Turn CSS classes into interactive React components.
+Create interactive React components from sets of CSS classes.
 
 ## Features
 
 - Tames long sets of CSS classes e.g. [tailwindcss][tw]
 - Produces typed and extensible components
 - Handles prop interpolations and transient props
-- Provides FP-style utilities to generate component variants etc.
+- Provides FP-style utilities to generate variants etc.
 - Backwards compatible with [clsx][clsx] and [classnames][cn]
 - Small and fast
 
@@ -53,7 +53,7 @@ const Button = classy.button<ButtonProps>((props) => ([
 
 To get tailwind completions, install the [tailwind extension][twex], and add to `.vscode/settings.json`:
 
-```json
+```jsonc
 {
   "editor.quickSuggestions": {
     "strings": true // forces VS Code to trigger completions when editing "string" content
