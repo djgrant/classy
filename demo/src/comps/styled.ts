@@ -1,4 +1,4 @@
-import { classy, ifElse, switchCase } from "../../../src";
+import { classy, ifElse, switchCase } from "@djgrant/classy";
 import { Double as BaseDouble } from "./base";
 
 export const Container = classy.div("m-auto max-w-72");
