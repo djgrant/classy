@@ -1,3 +1,5 @@
+import { JSX } from "react";
+
 type ClassName<T extends string> =
   | T
   | undefined
