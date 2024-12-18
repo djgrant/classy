@@ -9,8 +9,8 @@
   "module": "./src/index.js",
   "exports": {
     "import": "./src/index.js",
-    "default": "./dist/index.js",
-    "types": "./src/index.d.ts"
+    "types": "./src/index.d.ts",
+    "default": "./dist/index.js"
   },
   "files": [
     "src",
