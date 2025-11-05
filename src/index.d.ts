@@ -8,11 +8,13 @@ export const switchCase: <T = ClassNamesArgs>(
   matcher: Record<string, T>,
 ) => T;
 
-// scoped clsx api – allow strings, booleans, objects, and nested arrays
+// clsx api
 type ClassName<T extends string> =
   | T
   | undefined
   | null
+  | boolean
+  | number
   | { [key in T]?: boolean }
   | ClassName<T>[];
 
