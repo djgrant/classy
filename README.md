@@ -10,14 +10,16 @@ Shared core for the `classy` component factories.
 ## Install
 
 ```sh
-npm install @djgrant/classy @djgrant/classy-react
+npm install @djgrant/classy-react
 ```
 
 Or for Solid:
 
 ```sh
-npm install @djgrant/classy @djgrant/classy-solid
+npm install @djgrant/classy-solid
 ```
+
+The vendor packages bundle the shared core, so app code does not need to install `@djgrant/classy` separately unless you want the low-level helpers directly.
 
 ## Core API
 
@@ -40,6 +42,20 @@ Version `2.0.0` turns `@djgrant/classy` into the shared core package.
 
 - React users should move imports from `@djgrant/classy` to `@djgrant/classy-react`.
 - Solid users should use `@djgrant/classy-solid`.
+
+## API Parity
+
+| Concept | React | Solid |
+| --- | --- | --- |
+| Package | `@djgrant/classy-react` | `@djgrant/classy-solid` |
+| Main factory | `classy.div(...)` | `classy.div(...)` |
+| Component wrapping | `classy(Button)(...)` | `classy(Button)(...)` |
+| Variant helpers | `switchCase`, `ifElse`, `cn` | `switchCase`, `ifElse`, `cn` |
+| Styling-only props | `$tone`, `$size`, etc. | `$tone`, `$size`, etc. |
+| Polymorphism | `as` | `as` |
+| Class prop | `className` | `class` |
+| Wrapper type | `forwardRef` component | Solid component using `Dynamic` |
+| Intrinsic prop filtering | strips invalid DOM props | strips transient props and forwards the rest |
 
 ## Utilities
 

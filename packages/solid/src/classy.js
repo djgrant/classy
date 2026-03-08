@@ -1,4 +1,11 @@
-import { createClassy, cn, defineProxyProps, getDisplayName, hoistStatics, resolveClassNames } from "@djgrant/classy";
+import {
+  createClassy,
+  cn,
+  defineProxyProps,
+  getDisplayName,
+  hoistStatics,
+  resolveClassNames,
+} from "../../../src/index.js";
 import { createComponent, Dynamic } from "solid-js/web";
 
 export const classy = createClassy((tag, args) => {

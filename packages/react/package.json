@@ -16,17 +16,13 @@
     }
   },
   "files": [
-    "src",
     "dist",
-    "README.md"
+    "README.md",
+    "src/index.d.ts"
   ],
   "scripts": {
-    "build": "esbuild src/index.js --bundle --platform=neutral --target=esnext --format=esm --packages=external --outfile=dist/index.js && esbuild src/index.js --bundle --platform=neutral --target=esnext --format=cjs --packages=external --outfile=dist/index.cjs",
+    "build": "esbuild src/index.js --bundle --platform=neutral --target=esnext --format=esm --external:react --outfile=dist/index.js && esbuild src/index.js --bundle --platform=neutral --target=esnext --format=cjs --external:react --outfile=dist/index.cjs",
     "test": "node --test"
-  },
-  "dependencies": {
-    "@djgrant/classy": "workspace:*",
-    "@emotion/is-prop-valid": "^1.4.0"
   },
   "peerDependencies": {
     "react": ">=19.0.0"

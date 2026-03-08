@@ -1,5 +1,4 @@
 import { createElement, forwardRef } from "react";
-import isPropValid from "@emotion/is-prop-valid";
 import {
   cn,
   createClassy,
@@ -7,7 +6,8 @@ import {
   getDisplayName,
   hoistStatics,
   resolveClassNames,
-} from "@djgrant/classy";
+} from "../../../src/index.js";
+import { isPropValid } from "./is-prop-valid.js";
 
 const shouldForwardIntrinsicProp = (tag, propName) => {
   if (typeof tag !== "string" || tag.includes("-")) return true;
