@@ -6,7 +6,7 @@ import {
   getDisplayName,
   hoistStatics,
   resolveClassNames,
-} from "../../../src/index.js";
+} from "../../core/src/index.js";
 import { isPropValid } from "./is-prop-valid.js";
 
 const shouldForwardIntrinsicProp = (tag, propName) => {

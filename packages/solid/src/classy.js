@@ -5,7 +5,7 @@ import {
   getDisplayName,
   hoistStatics,
   resolveClassNames,
-} from "../../../src/index.js";
+} from "../../core/src/index.js";
 import { createComponent, Dynamic } from "solid-js/web";
 
 export const classy = createClassy((tag, args) => {

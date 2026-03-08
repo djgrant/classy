@@ -113,8 +113,6 @@ export const tags = [
   "var",
   "video",
   "wbr",
-
-  // SVG
   "circle",
   "clipPath",
   "defs",
