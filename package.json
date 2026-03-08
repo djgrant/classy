@@ -1,35 +1,40 @@
 {
   "name": "@djgrant/classy",
   "type": "module",
-  "version": "1.4.1",
+  "version": "2.0.0",
   "repository": "github:djgrant/classy",
   "license": "MIT",
-  "main": "./dist/index.js",
+  "main": "./dist/index.cjs",
   "types": "./src/index.d.ts",
-  "module": "./src/index.js",
+  "module": "./dist/index.js",
   "exports": {
-    "import": "./src/index.js",
-    "types": "./src/index.d.ts",
-    "default": "./dist/index.js"
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.js"
+    }
   },
   "files": [
     "src",
-    "dist"
+    "dist",
+    "README.md"
   ],
   "scripts": {
-    "prepare": "esbuild src/index.js --bundle --platform=neutral --target=esnext --format=cjs --packages=external --outfile=dist/index.js"
+    "build:core": "esbuild src/index.js --bundle --platform=neutral --target=esnext --format=esm --packages=external --outfile=dist/index.js && esbuild src/index.js --bundle --platform=neutral --target=esnext --format=cjs --packages=external --outfile=dist/index.cjs",
+    "build:react": "pnpm --filter @djgrant/classy-react build",
+    "build:solid": "pnpm --filter @djgrant/classy-solid build",
+    "build": "npm run build:core && npm run build:react && npm run build:solid",
+    "prepare": "npm run build",
+    "test:core": "node --test test/core.test.js",
+    "test:react": "pnpm --filter @djgrant/classy-react test",
+    "test:solid": "pnpm --filter @djgrant/classy-solid test",
+    "test": "npm run test:core && npm run test:react && npm run test:solid"
   },
   "dependencies": {
     "clsx": "^2.1.1"
   },
-  "peerDependencies": {
-    "react": ">=19.0.0"
-  },
   "devDependencies": {
-    "@swc/cli": "^0.5.2",
-    "@swc/core": "^1.10.1",
-    "@types/react": "^19.0.10",
-    "esbuild": "^0.24.0",
-    "react": "^19.0.0"
+    "esbuild": "^0.24.0"
   }
 }

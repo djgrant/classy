@@ -1,0 +1,36 @@
+{
+  "name": "@djgrant/classy-solid",
+  "type": "module",
+  "version": "1.0.0",
+  "repository": "github:djgrant/classy",
+  "license": "MIT",
+  "main": "./dist/index.cjs",
+  "types": "./src/index.d.ts",
+  "module": "./dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "src",
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "esbuild src/index.js --bundle --platform=neutral --target=esnext --format=esm --packages=external --outfile=dist/index.js && esbuild src/index.js --bundle --platform=neutral --target=esnext --format=cjs --packages=external --outfile=dist/index.cjs",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@djgrant/classy": "workspace:*"
+  },
+  "peerDependencies": {
+    "solid-js": ">=1.9.0"
+  },
+  "devDependencies": {
+    "solid-js": "^1.9.9"
+  }
+}

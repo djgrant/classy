@@ -1,3 +1,3 @@
-export * from "./classy.js";
+export * from "./core.js";
+export * from "./tags.js";
 export * from "./utils.js";
-export { clsx as cn } from "clsx";

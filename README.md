@@ -1,78 +1,56 @@
-# classy
+# @djgrant/classy
 
-Create interactive React components from sets of CSS classes.
+Shared core for the `classy` component factories.
 
-## Features
+`@djgrant/classy` is the framework-agnostic package. Use one of the vendor packages to build components:
 
-- Tames long sets of CSS classes e.g. [tailwindcss][tw]
-- Produces typed and extensible components
-- Handles prop interpolations and transient props
-- Provides FP-style utilities to generate variants etc.
-- Backwards compatible with [clsx][clsx] and [classnames][cn]
-- Small and fast
+- `@djgrant/classy-react`
+- `@djgrant/classy-solid`
 
-## Getting Started
+## Install
 
 ```sh
-npm install @djgrant/classy
+npm install @djgrant/classy @djgrant/classy-react
 ```
 
-```tsx
-import { classy, switchCase } from "@djgrant/classy";
+Or for Solid:
 
-type ButtonProps = { size: "sm" | "md" | "lg" };
-
-const Button = classy.button<ButtonProps>((props) => ([
-  "font-semibold",
-  "rounded",
-  switchCase(props.size, {
-    lg: ["text-base", "py-3", "px-4"],
-    sm: ["text-xs", "py-1", "px-2"],
-    default: ["text-sm", "py-2", "px-3"],
-  }),
-]);
-
-<Button size="lg">Submit</Button>;
+```sh
+npm install @djgrant/classy @djgrant/classy-solid
 ```
 
-## Examples
+## Core API
 
-### Input Parameters
+The core package exports:
 
-### Prop Switching
+- `cn`
+- `createClassy`
+- `defineProxyProps`
+- `filterProps`
+- `getDisplayName`
+- `hoistStatics`
+- `ifElse`
+- `resolveClassNames`
+- `switchCase`
+- `tags`
 
-### Custom Components
+## Migration
 
-### Extending Components
+Version `2.0.0` turns `@djgrant/classy` into the shared core package.
 
-### Generating className Strings
+- React users should move imports from `@djgrant/classy` to `@djgrant/classy-react`.
+- Solid users should use `@djgrant/classy-solid`.
 
-### Declaring Transient Props
+## Utilities
 
-## Tailwind Support
+```ts
+import { ifElse, switchCase } from "@djgrant/classy";
 
-To get tailwind completions, install the [tailwind extension][twex], and add to `.vscode/settings.json`:
+switchCase("lg", {
+  sm: "text-sm",
+  lg: "text-lg",
+  default: "text-base",
+});
 
-```jsonc
-{
-  "editor.quickSuggestions": {
-    "strings": true // forces VS Code to trigger completions when editing "string" content
-  },
-  "tailwindCSS.experimental.classRegex": [
-    ["classy\\..+\\(([^)]*)\\)", "\"([^\"]*)\""] // classy.div(...)
-  ]
-}
+ifElse(true, "font-bold", "font-normal");
 ```
-
-## Credits
-
-Created by Daniel Grant ([@djgrant\_][djg]).
-
-Inspired by [styled-components][sc] and [classnames][cn].
-
-[tw]: https://tailwindcss.com
-[twex]: https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss
-[sc]: https://styled-components.com
-[cn]: https://www.npmjs.com/package/classnames
-[clsx]: https://github.com/lukeed/clsx
-[djg]: https://twitter.com/djgrant_
