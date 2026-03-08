@@ -1,8 +1,8 @@
-# @djgrant/classy
+# @djgrant/classy-core
 
 Shared core for the `classy` component factories.
 
-`@djgrant/classy` is the framework-agnostic package. Use one of the vendor packages to build components:
+`@djgrant/classy-core` is the framework-agnostic package. Use one of the vendor packages to build components:
 
 - `@djgrant/classy-react`
 - `@djgrant/classy-solid`
@@ -19,7 +19,7 @@ Or for Solid:
 npm install @djgrant/classy-solid
 ```
 
-The vendor packages bundle the shared core, so app code does not need to install `@djgrant/classy` separately unless you want the low-level helpers directly.
+The vendor packages bundle the shared core, so app code does not need to install `@djgrant/classy-core` separately unless you want the low-level helpers directly.
 
 ## Core API
 
@@ -38,9 +38,9 @@ The core package exports:
 
 ## Migration
 
-Version `2.0.0` turns `@djgrant/classy` into the shared core package.
+Version `1.0.0` establishes `@djgrant/classy-core` as the shared core package.
 
-- React users should move imports from `@djgrant/classy` to `@djgrant/classy-react`.
+- React users should move core imports from `@djgrant/classy-core` to `@djgrant/classy-react` for framework bindings.
 - Solid users should use `@djgrant/classy-solid`.
 
 ## API Parity
@@ -60,7 +60,7 @@ Version `2.0.0` turns `@djgrant/classy` into the shared core package.
 ## Utilities
 
 ```ts
-import { ifElse, switchCase } from "@djgrant/classy";
+import { ifElse, switchCase } from "@djgrant/classy-core";
 
 switchCase("lg", {
   sm: "text-sm",

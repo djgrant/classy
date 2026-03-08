@@ -3,11 +3,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build:core": "pnpm --filter @djgrant/classy build",
+    "build:core": "pnpm --filter @djgrant/classy-core build",
     "build:react": "pnpm --filter @djgrant/classy-react build",
     "build:solid": "pnpm --filter @djgrant/classy-solid build",
     "build": "npm run build:core && npm run build:react && npm run build:solid",
-    "test:core": "pnpm --filter @djgrant/classy test",
+    "test:core": "pnpm --filter @djgrant/classy-core test",
     "test:react": "pnpm --filter @djgrant/classy-react test",
     "test:solid": "pnpm --filter @djgrant/classy-solid test",
     "test": "npm run test:core && npm run test:react && npm run test:solid"

@@ -1,6 +1,6 @@
 # @djgrant/classy-solid
 
-Solid vendor package for `@djgrant/classy`.
+Solid vendor package for `@djgrant/classy-core`.
 
 ```tsx
 import { classy, switchCase } from "@djgrant/classy-solid";

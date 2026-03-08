@@ -1,6 +1,6 @@
 # @djgrant/classy-react
 
-React vendor package for `@djgrant/classy`.
+React vendor package for `@djgrant/classy-core`.
 
 ```tsx
 import { classy, switchCase } from "@djgrant/classy-react";

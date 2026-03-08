@@ -2,7 +2,7 @@
 
 Monorepo for the `classy` packages:
 
-- `@djgrant/classy` in `packages/core`
+- `@djgrant/classy-core` in `packages/core`
 - `@djgrant/classy-react` in `packages/react`
 - `@djgrant/classy-solid` in `packages/solid`
 
