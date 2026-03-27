@@ -5,7 +5,7 @@ import {
   getDisplayName,
   hoistStatics,
   resolveClassNames,
-} from "@djgrant/classy-core";
+} from "../../core/src/index.js";
 import { createComponent, Dynamic } from "solid-js/web";
 
 /**

@@ -65,7 +65,6 @@ export const tags = [
   "mark",
   "marquee",
   "menu",
-  "menuitem",
   "meta",
   "meter",
   "nav",

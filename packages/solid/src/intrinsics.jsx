@@ -80,7 +80,7 @@ export const intrinsics = {
   mark: (p) => <mark {...p} />,
   marquee: (p) => <marquee {...p} />,
   menu: (p) => <menu {...p} />,
-  menuitem: (p) => <menuitem {...p} />,
+
   meta: (p) => <meta {...p} />,
   meter: (p) => <meter {...p} />,
   nav: (p) => <nav {...p} />,
