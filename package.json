@@ -5,8 +5,7 @@
   "scripts": {
     "build:core": "pnpm --filter @djgrant/classy-core build",
     "build:react": "pnpm --filter @djgrant/classy-react build",
-    "build:solid": "pnpm --filter @djgrant/classy-solid build",
-    "build": "npm run build:core && npm run build:react && npm run build:solid",
+    "build": "npm run build:core && npm run build:react",
     "test:core": "pnpm --filter @djgrant/classy-core test",
     "test:react": "pnpm --filter @djgrant/classy-react test",
     "test:solid": "pnpm --filter @djgrant/classy-solid test",

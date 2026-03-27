@@ -1,9 +1,16 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 
-import { createComponent, Dynamic, renderToString } from "solid-js/web";
+import { createComponent, Dynamic, renderToString, createDynamic } from "solid-js/web";
+import { cn, ifElse, switchCase } from "../../../packages/core/src/index.js";
+import { createClassySolid } from "../src/factory.js";
 
-import { classy, cn, ifElse, switchCase } from "../src/index.js";
+// For testing, use createDynamic (the runtime path) since bare Node
+// can't run JSX. The intrinsics JSX path is tested via integration
+// with a Solid-aware bundler (Vite + vite-plugin-solid).
+const classy = createClassySolid((tag, props) => {
+  return createDynamic(() => tag, props);
+});
 
 test("filters transient props on intrinsic elements", () => {
   const Box = classy.div(({ $tone }) => ["box", $tone]);

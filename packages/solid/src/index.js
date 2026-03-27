@@ -1,2 +1,2 @@
-export * from "./classy.js";
-export * from "@djgrant/classy-core";
+export * from "./classy.jsx";
+export * from "../../core/src/index.js";
