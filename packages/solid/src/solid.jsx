@@ -6,9 +6,8 @@ import {
   hoistStatics,
   resolveClassNames,
 } from "@djgrant/classy-core";
-import { createComponent, createDynamic, Dynamic } from "solid-js/web";
-
-export * from "@djgrant/classy-core";
+import { createComponent, Dynamic } from "solid-js/web";
+import { intrinsics } from "./intrinsics.jsx";
 
 export const classy = createClassy((tag, args) => {
   const component = (props) => {
@@ -19,16 +18,19 @@ export const classy = createClassy((tag, args) => {
       get: () => cn(resolveClassNames(args, props), props.class),
     });
 
-    // For string tags, use createDynamic directly to avoid an extra component
-    // boundary that breaks SSR hydration. createDynamic is the lower-level
-    // primitive that Dynamic wraps — it renders inline without a boundary.
-    if (typeof tag === "string") {
-      return createDynamic(() => props.as || tag, forwardedProps);
+    const resolvedTag = props.as || tag;
+
+    // When the resolved tag is a string and we have a static JSX component
+    // for it, use that directly. This lets the Solid compiler produce a
+    // static template — critical for SSR hydration to work correctly.
+    if (typeof resolvedTag === "string" && intrinsics[resolvedTag]) {
+      return createComponent(intrinsics[resolvedTag], forwardedProps);
     }
 
+    // Custom component or unknown tag — fall back to Dynamic
     Object.defineProperty(forwardedProps, "component", {
       enumerable: true,
-      get: () => props.as || tag,
+      get: () => resolvedTag,
     });
 
     return createComponent(Dynamic, forwardedProps);

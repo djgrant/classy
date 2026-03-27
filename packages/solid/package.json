@@ -9,7 +9,7 @@
   "module": "./dist/index.js",
   "exports": {
     ".": {
-      "solid": "./src/solid.js",
+      "solid": "./src/solid.jsx",
       "types": "./src/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs",
