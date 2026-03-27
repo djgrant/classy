@@ -1,18 +1,3 @@
-/**
- * Auto-generated static JSX components for each HTML/SVG tag.
- *
- * Each component returns real JSX (e.g. <div {...p} />) so that the Solid
- * compiler can produce a static template() call for it. This is critical
- * for SSR hydration — createDynamic/Dynamic resolve tags at runtime, which
- * bypasses the compiler and causes server/client template mismatches.
- *
- * To regenerate: node scripts/generate-intrinsics.js
- */
-
-// Each component is a thin wrapper that the Solid compiler can statically
-// analyse. The compiler sees e.g. <div /> and emits template("<div></div>")
-// on the client, and ssr("<div>") on the server — producing matching output.
-
 export const intrinsics = {
   a: (p) => <a {...p} />,
   abbr: (p) => <abbr {...p} />,
