@@ -1,13 +1,14 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 
 import { createComponent, Dynamic, renderToString, createDynamic } from "solid-js/web";
 import { cn, ifElse, switchCase } from "../../../packages/core/src/index.js";
 import { createClassySolid } from "../src/factory.js";
+import { classy as publishedClassy } from "../src/index.js";
 
-// For testing, use createDynamic (the runtime path) since bare Node
-// can't run JSX. The intrinsics JSX path is tested via integration
-// with a Solid-aware bundler (Vite + vite-plugin-solid).
+// The published package uses createDynamic for string tags so SSR
+// consumers do not need Solid JSX transforms inside node_modules.
 const classy = createClassySolid((tag, props) => {
   return createDynamic(() => tag, props);
 });
@@ -90,4 +91,27 @@ test("re-exports shared helpers", () => {
     cn("base", ["accent"], { hidden: false, visible: true }),
     "base accent visible",
   );
+});
+
+test("published package entry renders intrinsic elements during SSR", () => {
+  const Box = publishedClassy.div(({ $tone }) => ["box", $tone]);
+  const html = renderToString(() =>
+    createComponent(Box, {
+      $tone: "loud",
+      class: "extra",
+      children: "Hello",
+    }),
+  );
+
+  assert.match(html, /^<div /);
+  assert.match(html, /class="box loud extra ?"/);
+  assert.match(html, />Hello<\/div>$/);
+});
+
+test("published package no longer ships JSX-only solid intrinsics", async () => {
+  const source = await readFile(new URL("../src/classy.js", import.meta.url), "utf8");
+
+  assert.match(source, /createDynamic/);
+  assert.doesNotMatch(source, /intrinsics/);
+  assert.doesNotMatch(source, /document\.createElement/);
 });
