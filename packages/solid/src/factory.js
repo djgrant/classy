@@ -17,13 +17,20 @@ export function createClassySolid(renderIntrinsic) {
   return createClassy((tag, args) => {
     const component = (props) => {
       const forwardedProps = defineProxyProps(props, {
-        exclude: ["as", "class"],
+        exclude: ["as", "class", "ref"],
       });
 
       Object.defineProperty(forwardedProps, "class", {
         enumerable: true,
         get: () => cn(resolveClassNames(args, props), props.class),
       });
+
+      if ("ref" in props) {
+        Object.defineProperty(forwardedProps, "ref", {
+          enumerable: true,
+          get: () => props.ref,
+        });
+      }
 
       const resolvedTag = props.as || tag;
 

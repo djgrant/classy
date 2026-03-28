@@ -48,6 +48,29 @@ test("uses the rendered as tag when forwarding props", () => {
   assert.match(html, /href="\/docs"/);
 });
 
+test("preserves non-enumerable refs for intrinsic elements", () => {
+  let seenProps;
+
+  const classyWithSpy = createClassySolid((tag, props) => {
+    seenProps = props;
+    return createDynamic(() => tag, props);
+  });
+  const Box = classyWithSpy.div("box");
+  const ref = () => {};
+  const props = {
+    children: "Hello",
+  };
+
+  Object.defineProperty(props, "ref", {
+    configurable: true,
+    value: ref,
+  });
+
+  renderToString(() => createComponent(Box, props));
+
+  assert.equal(seenProps.ref, ref);
+});
+
 test("preserves wrapped component statics and forwards non-transient props", () => {
   let seenProps;
 
@@ -77,6 +100,33 @@ test("preserves wrapped component statics and forwards non-transient props", () 
   assert.equal(seenProps.$tone, undefined);
   assert.equal(seenProps.class, "base accent extra");
   assert.match(html, /class="base accent extra ?"/);
+});
+
+test("preserves non-enumerable refs for wrapped components", () => {
+  let seenProps;
+
+  const Base = (props) => {
+    seenProps = props;
+    return createComponent(Dynamic, {
+      component: "div",
+      class: props.class,
+      children: props.children,
+    });
+  };
+  const Wrapped = classy(Base)("base");
+  const ref = () => {};
+  const props = {
+    children: "Hello",
+  };
+
+  Object.defineProperty(props, "ref", {
+    configurable: true,
+    value: ref,
+  });
+
+  renderToString(() => createComponent(Wrapped, props));
+
+  assert.equal(seenProps.ref, ref);
 });
 
 test("re-exports shared helpers", () => {
