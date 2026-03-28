@@ -1,7 +1,7 @@
 {
   "name": "@djgrant/classy-react",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "repository": "github:djgrant/classy",
   "license": "MIT",
   "main": "./dist/index.cjs",
