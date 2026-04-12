@@ -20,33 +20,42 @@ export const switchCase: <T = ClassNamesArgs>(
   matcher: Record<string, T> & { default?: T },
 ) => T | undefined;
 
-type PropsWithAs<Props> = Props & { as?: ValidComponent };
-type WrappedComponent<Props> = Component<Props>;
 type PreserveStatics<Tag> = { [K in keyof Tag]: Tag[K] };
 type PropsOf<Tag extends ValidComponent> = ComponentProps<Tag>;
+
+type PolymorphicProps<
+  DefaultProps,
+  C extends ValidComponent = ValidComponent,
+> = Omit<DefaultProps, keyof ComponentProps<C>> &
+  ComponentProps<C> & { as?: C };
+
+type PolymorphicComponent<DefaultProps> = {
+  <C extends ValidComponent>(
+    props: PolymorphicProps<DefaultProps, C>,
+  ): JSX.Element;
+  (props: DefaultProps & { as?: never }): JSX.Element;
+  displayName?: string;
+};
 
 type CreateClassyIntrinsicComponentFactory<
   Tag extends keyof JSX.IntrinsicElements,
 > = {
-  (...args: ClassyArgs<JSX.IntrinsicElements[Tag]>): WrappedComponent<
-    PropsWithAs<JSX.IntrinsicElements[Tag]>
+  (...args: ClassyArgs<JSX.IntrinsicElements[Tag]>): PolymorphicComponent<
+    JSX.IntrinsicElements[Tag]
   >;
   <ExtraProps = {}>(
     ...args: ClassyArgs<JSX.IntrinsicElements[Tag] & ExtraProps>
-  ): WrappedComponent<PropsWithAs<JSX.IntrinsicElements[Tag] & ExtraProps>>;
+  ): PolymorphicComponent<JSX.IntrinsicElements[Tag] & ExtraProps>;
 };
 
 type ExtrinsicComponent = Exclude<ValidComponent, keyof JSX.IntrinsicElements>;
 
 type CreateClassyExtrinsicComponentFactory<Tag extends ExtrinsicComponent> = {
-  (...args: ClassyArgs<PropsOf<Tag>>): WrappedComponent<
-    PropsWithAs<PropsOf<Tag>>
-  > &
+  (...args: ClassyArgs<PropsOf<Tag>>): PolymorphicComponent<PropsOf<Tag>> &
     PreserveStatics<Tag>;
   <ExtraProps = {}>(
     ...args: ClassyArgs<PropsOf<Tag> & ExtraProps>
-  ): WrappedComponent<PropsWithAs<PropsOf<Tag> & ExtraProps>> &
-    PreserveStatics<Tag>;
+  ): PolymorphicComponent<PropsOf<Tag> & ExtraProps> & PreserveStatics<Tag>;
 };
 
 type ClassyTags = {

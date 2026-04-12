@@ -21,23 +21,35 @@ export const switchCase: <T = ClassNamesArgs>(
   matcher: Record<string, T> & { default?: T },
 ) => T | undefined;
 
-type PropsWithAs<Props> = Props & { as?: React.ElementType };
-type WrappedComponent<Props> = React.ForwardRefExoticComponent<Props>;
 type PreserveStatics<Tag> = { [K in keyof Tag]: Tag[K] };
 type PropsOf<Tag extends React.ElementType> = JSX.LibraryManagedAttributes<
   Tag,
   React.ComponentPropsWithRef<Tag>
 >;
 
+type PolymorphicProps<
+  DefaultProps,
+  C extends React.ElementType = React.ElementType,
+> = Omit<DefaultProps, keyof React.ComponentPropsWithRef<C>> &
+  React.ComponentPropsWithRef<C> & { as?: C };
+
+type PolymorphicComponent<DefaultProps> = {
+  <C extends React.ElementType>(
+    props: PolymorphicProps<DefaultProps, C>,
+  ): React.ReactElement | null;
+  (props: DefaultProps & { as?: never }): React.ReactElement | null;
+  displayName?: string;
+};
+
 type CreateClassyIntrinsicComponentFactory<
   Tag extends keyof JSX.IntrinsicElements,
 > = {
-  (...args: ClassyArgs<JSX.IntrinsicElements[Tag]>): WrappedComponent<
-    PropsWithAs<JSX.IntrinsicElements[Tag]>
+  (...args: ClassyArgs<JSX.IntrinsicElements[Tag]>): PolymorphicComponent<
+    JSX.IntrinsicElements[Tag]
   >;
   <ExtraProps = {}>(
     ...args: ClassyArgs<JSX.IntrinsicElements[Tag] & ExtraProps>
-  ): WrappedComponent<PropsWithAs<JSX.IntrinsicElements[Tag] & ExtraProps>>;
+  ): PolymorphicComponent<JSX.IntrinsicElements[Tag] & ExtraProps>;
 };
 
 type ExtrinsicComponent =
@@ -45,14 +57,11 @@ type ExtrinsicComponent =
   | React.ForwardRefExoticComponent<any>;
 
 type CreateClassyExtrinsicComponentFactory<Tag extends ExtrinsicComponent> = {
-  (...args: ClassyArgs<PropsOf<Tag>>): WrappedComponent<
-    PropsWithAs<PropsOf<Tag>>
-  > &
+  (...args: ClassyArgs<PropsOf<Tag>>): PolymorphicComponent<PropsOf<Tag>> &
     PreserveStatics<Tag>;
   <ExtraProps = {}>(
     ...args: ClassyArgs<PropsOf<Tag> & ExtraProps>
-  ): WrappedComponent<PropsWithAs<PropsOf<Tag> & ExtraProps>> &
-    PreserveStatics<Tag>;
+  ): PolymorphicComponent<PropsOf<Tag> & ExtraProps> & PreserveStatics<Tag>;
 };
 
 type ClassyTags = {
