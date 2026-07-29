@@ -1,19 +1,7 @@
 # classy
 
-Monorepo for the `classy` packages:
-
-- `@djgrant/classy-core` in `packages/core`
-- `@djgrant/classy-react` in `packages/react`
-- `@djgrant/classy-solid` in `packages/solid`
-
-## Workspace
-
-```sh
-pnpm install
-pnpm build
-pnpm test
-```
-
-## Demo
-
-The React demo app lives in `demo` and consumes `@djgrant/classy-react` from the workspace.
+- [`@djgrant/classy-core`](packages/core)
+- [`@djgrant/classy-react`](packages/react)
+- [`@djgrant/classy-solid`](packages/solid)
+- [`@djgrant/classy-foldkit`](packages/foldkit)
+- [`demo`](demo)

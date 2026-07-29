@@ -40,15 +40,15 @@ used only to resolve classes and never become DOM attributes:
 
 ```ts
 const StatusOption = c.div<{
-  $selected: boolean;
-  $first: boolean;
+  selected: boolean;
+  first: boolean;
 }>((props) => [
   "px-3 py-1.5",
-  props.$selected ? "bg-sky-50" : "bg-white",
-  props.$first && "rounded-t-lg",
+  props.selected ? "bg-sky-50" : "bg-white",
+  props.first && "rounded-t-lg",
 ]);
 
-StatusOption({ $selected: true, $first: false })(
+StatusOption({ selected: true, first: false })(
   [...bundleAttributes, h.Key("planned")],
   ["Planned"],
 );
@@ -95,12 +95,12 @@ The package also exports the shared `cn`, `ifElse`, and `switchCase` helpers:
 ```ts
 import { classy, ifElse, switchCase } from "@djgrant/classy-foldkit";
 
-const Badge = classy<Message>().span<{ $tone: "info" | "danger" }>((props) => [
+const Badge = classy<Message>().span<{ tone: "info" | "danger" }>((props) => [
   "rounded px-2 py-1",
-  switchCase(props.$tone, {
+  switchCase(props.tone, {
     info: "bg-sky-50 text-sky-700",
     danger: "bg-red-50 text-red-700",
   }),
-  ifElse(props.$tone === "danger", "font-semibold"),
+  ifElse(props.tone === "danger", "font-semibold"),
 ]);
 ```
