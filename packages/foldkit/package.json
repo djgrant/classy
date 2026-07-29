@@ -1,0 +1,49 @@
+{
+  "name": "@djgrant/classy-foldkit",
+  "type": "module",
+  "version": "1.2.1",
+  "description": "Classy component factories for Foldkit HTML views",
+  "keywords": [
+    "classy",
+    "foldkit",
+    "css",
+    "class-names",
+    "typescript"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/djgrant/classy.git",
+    "directory": "packages/foldkit"
+  },
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "types": "./src/index.d.ts",
+  "module": "./dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "src/index.d.ts"
+  ],
+  "scripts": {
+    "build": "esbuild src/index.js --bundle --platform=neutral --target=esnext --format=esm --external:foldkit --external:foldkit/* --outfile=dist/index.js",
+    "test": "node --test test/*.test.js && tsc --noEmit"
+  },
+  "peerDependencies": {
+    "foldkit": "^0.133.0"
+  },
+  "devDependencies": {
+    "foldkit": "^0.133.0",
+    "typescript": "^6.0.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
