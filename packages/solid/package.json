@@ -19,6 +19,9 @@
   "scripts": {
     "test": "node --test"
   },
+  "dependencies": {
+    "@djgrant/classy-core": "^1.2.1"
+  },
   "peerDependencies": {
     "solid-js": ">=1.9.0"
   },

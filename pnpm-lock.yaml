@@ -95,6 +95,10 @@ importers:
         version: 19.2.4
 
   packages/solid:
+    dependencies:
+      '@djgrant/classy-core':
+        specifier: ^1.2.1
+        version: 1.2.1
     devDependencies:
       solid-js:
         specifier: ^1.9.9
@@ -188,6 +192,9 @@ packages:
   '@babel/types@7.29.0':
     resolution: {integrity: sha512-LwdZHpScM4Qz8Xw2iKSzS+cfglZzJGvofQICy7W7v4caru4EaAmyUuO6BGrbyQ2mYV11W0U8j5mBhd14dd3B0A==}
     engines: {node: '>=6.9.0'}
+
+  '@djgrant/classy-core@1.2.1':
+    resolution: {integrity: sha512-/hagXAf98uk6FlbDYMVfzQesi+p/Rv9WAput+HwHGPVn1PCT46k50ZOL9qFAagYWPYL30De1q1i+rRDyI2BfgA==}
 
   '@effect/platform-browser@4.0.0-beta.102':
     resolution: {integrity: sha512-DXXVt+oOpukqI3lEaGvvXQxSobzIy3lAsIQvlpVK+MuYBm1o4FHZrHKbrOFItDUvSR1t0kiTncFPRi01YaJUmA==}
@@ -1796,6 +1803,10 @@ snapshots:
     dependencies:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.28.5
+
+  '@djgrant/classy-core@1.2.1':
+    dependencies:
+      clsx: 2.1.1
 
   '@effect/platform-browser@4.0.0-beta.102(effect@4.0.0-beta.102)':
     dependencies:
