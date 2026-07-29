@@ -1,3 +1,6 @@
 packages:
   - "packages/*"
   - "demo"
+allowBuilds:
+  # Optional native accelerator for msgpackr; the pure-JS fallback is used instead.
+  msgpackr-extract: false
