@@ -1,4 +1,3 @@
-import { html } from "foldkit/html";
 import {
   cn,
   createClassy,
@@ -36,26 +35,23 @@ const mergeAttributes = (h, classNames, attributes) => {
   return [h.Class(cn(classNames, callerClassNames)), ...otherAttributes];
 };
 
-const elementFor = (h, tag, classNames) => {
-  const element = h[tag];
-
+const elementFor = (tag, classNames) => {
   if (voidTags.has(tag)) {
-    return (attributes) => element(mergeAttributes(h, classNames, attributes));
+    return (attributes, h) =>
+      h[tag](mergeAttributes(h, classNames, attributes));
   }
 
-  return (attributes, children) =>
-    element(mergeAttributes(h, classNames, attributes), children);
+  return (attributes, children, h) =>
+    h[tag](mergeAttributes(h, classNames, attributes), children);
 };
 
 export const classy = () => {
-  const h = html();
-
   const factory = createClassy((tag, args) => {
     if (typeof args[0] === "function") {
-      return (props) => elementFor(h, tag, resolveClassNames(args, props));
+      return (props) => elementFor(tag, resolveClassNames(args, props));
     }
 
-    return elementFor(h, tag, resolveClassNames(args));
+    return elementFor(tag, resolveClassNames(args));
   });
 
   return new Proxy(factory, {

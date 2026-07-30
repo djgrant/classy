@@ -4,3 +4,5 @@ packages:
 allowBuilds:
   # Optional native accelerator for msgpackr; the pure-JS fallback is used instead.
   msgpackr-extract: false
+minimumReleaseAgeExclude:
+  - foldkit@0.134.0

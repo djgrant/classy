@@ -79,8 +79,8 @@ importers:
   packages/foldkit:
     devDependencies:
       foldkit:
-        specifier: ^0.133.0
-        version: 0.133.0(@effect/platform-browser@4.0.0-beta.102(effect@4.0.0-beta.102))(effect@4.0.0-beta.102)
+        specifier: ^0.134.0
+        version: 0.134.0(@effect/platform-browser@4.0.0-beta.102(effect@4.0.0-beta.102))(effect@4.0.0-beta.102)
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
@@ -1129,8 +1129,8 @@ packages:
   flatted@3.3.4:
     resolution: {integrity: sha512-3+mMldrTAPdta5kjX2G2J7iX4zxtnwpdA8Tr2ZSjkyPSanvbZAcy6flmtnXbEybHrDcU9641lxrMfFuUxVz9vA==}
 
-  foldkit@0.133.0:
-    resolution: {integrity: sha512-B4IgiOap/vIvFWC46pjVHHMkXgHvR4mIsEwhu7i060JcBZHJVftc37ynhX8bK9FuXstRkx+vF2eTdMELmatlEw==}
+  foldkit@0.134.0:
+    resolution: {integrity: sha512-3I1grOiwML3JlmZKX45ILmnhFvGxeZMdAsvX5yWfVFQ2Inbatrnz/ISqXQcI7NAUPJjBZuRJrMS3F8xSmCGovw==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       '@effect/platform-browser': 4.0.0-beta.102
@@ -2615,7 +2615,7 @@ snapshots:
 
   flatted@3.3.4: {}
 
-  foldkit@0.133.0(@effect/platform-browser@4.0.0-beta.102(effect@4.0.0-beta.102))(effect@4.0.0-beta.102):
+  foldkit@0.134.0(@effect/platform-browser@4.0.0-beta.102(effect@4.0.0-beta.102))(effect@4.0.0-beta.102):
     dependencies:
       '@effect/platform-browser': 4.0.0-beta.102(effect@4.0.0-beta.102)
       effect: 4.0.0-beta.102

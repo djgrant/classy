@@ -2,6 +2,7 @@ import type {
   Attribute,
   ChildAttribute,
   Html,
+  HtmlBuilder,
   TagName,
 } from "foldkit/html";
 
@@ -42,24 +43,29 @@ type VoidTag =
   | "track"
   | "wbr";
 
-type ElementFunction<Message, Tag extends TagName> = Tag extends VoidTag
-  ? (attributes: Attributes<Message>) => Html
-  : (attributes: Attributes<Message>, children: Children) => Html;
+type ElementFunction<Tag extends TagName> = Tag extends VoidTag
+  ? <Message>(
+      attributes: Attributes<NoInfer<Message>>,
+      h: HtmlBuilder<Message>,
+    ) => Html
+  : <Message>(
+      attributes: Attributes<NoInfer<Message>>,
+      children: Children,
+      h: HtmlBuilder<Message>,
+    ) => Html;
 
-type ClassyTagFactory<Message, Tag extends TagName> = {
-  (...classNames: ClassNamesArgs[]): ElementFunction<Message, Tag>;
-  <Props>(
-    mapper: ClassyMapper<Props>,
-  ): (props: Props) => ElementFunction<Message, Tag>;
+type ClassyTagFactory<Tag extends TagName> = {
+  (...classNames: ClassNamesArgs[]): ElementFunction<Tag>;
+  <Props>(mapper: ClassyMapper<Props>): (props: Props) => ElementFunction<Tag>;
 };
 
-type ClassyTags<Message> = {
-  [Tag in TagName]: ClassyTagFactory<Message, Tag>;
+type ClassyTags = {
+  [Tag in TagName]: ClassyTagFactory<Tag>;
 };
 
-export type Classy<Message> = ClassyTags<Message> & {
-  <Tag extends TagName>(tag: Tag): ClassyTagFactory<Message, Tag>;
+export type Classy = ClassyTags & {
+  <Tag extends TagName>(tag: Tag): ClassyTagFactory<Tag>;
   string: (...args: ClassNamesArgs[]) => string;
 };
 
-export const classy: <Message = never>() => Classy<Message>;
+export const classy: () => Classy;

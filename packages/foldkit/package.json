@@ -1,7 +1,7 @@
 {
   "name": "@djgrant/classy-foldkit",
   "type": "module",
-  "version": "1.2.1",
+  "version": "2.0.0",
   "description": "Classy component factories for Foldkit HTML views",
   "keywords": [
     "classy",
@@ -37,10 +37,10 @@
     "test": "node --test test/*.test.js && tsc --noEmit"
   },
   "peerDependencies": {
-    "foldkit": "^0.133.0"
+    "foldkit": "^0.134.0"
   },
   "devDependencies": {
-    "foldkit": "^0.133.0",
+    "foldkit": "^0.134.0",
     "typescript": "^6.0.3"
   },
   "publishConfig": {

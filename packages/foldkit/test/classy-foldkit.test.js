@@ -1,10 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { html } from "foldkit/html";
+import { inertHtml as h } from "foldkit/html";
 
 import { classy } from "../src/index.js";
 
-const h = html();
 const c = classy();
 
 test("merges every Class value into one leading class result", () => {
@@ -12,6 +11,7 @@ test("merges every Class value into one leading class result", () => {
   const vnode = Button(
     [h.Title("Save"), h.Class("caller-one"), h.Class("caller-two"), h.Id("save")],
     ["Save"],
+    h,
   );
 
   assert.deepEqual(vnode.data.class, {
@@ -33,7 +33,7 @@ test("preserves non-Class attributes in order, including ChildAttribute values",
     boundaryMappers: [],
   };
   const Box = c.div("box");
-  const vnode = Box([childAttribute, h.Class("caller"), h.Id("box")], []);
+  const vnode = Box([childAttribute, h.Class("caller"), h.Id("box")], [], h);
 
   assert.deepEqual(vnode.data.class, { box: true, caller: true });
   assert.deepEqual(Object.keys(vnode.data.props), ["title", "id"]);
@@ -49,6 +49,7 @@ test("variant mappers return a props-curried element function", () => {
   const vnode = Status({ $selected: true, $first: false })(
     [h.Class("caller"), h.Key("planned")],
     ["Planned"],
+    h,
   );
 
   assert.deepEqual(vnode.data.class, {
@@ -59,9 +60,9 @@ test("variant mappers return a props-curried element function", () => {
   assert.equal(vnode.key, "planned");
 });
 
-test("void elements accept attributes only", () => {
+test("void elements accept attributes and the builder only", () => {
   const Input = c.input("field");
-  const vnode = Input([h.Class("wide"), h.Type("text")]);
+  const vnode = Input([h.Class("wide"), h.Type("text")], h);
 
   assert.equal(vnode.sel, "input");
   assert.deepEqual(vnode.data.class, { field: true, wide: true });
@@ -71,7 +72,7 @@ test("void elements accept attributes only", () => {
 
 test("exposes Foldkit tags beyond the core's predeclared tag list", () => {
   const Search = c.search("search");
-  const vnode = Search([], []);
+  const vnode = Search([], [], h);
 
   assert.equal(vnode.sel, "search");
   assert.deepEqual(vnode.data.class, { search: true });
