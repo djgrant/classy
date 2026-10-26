@@ -6,3 +6,4 @@ allowBuilds:
   msgpackr-extract: false
 minimumReleaseAgeExclude:
   - foldkit@0.134.0
+  - '@pokit/*'
