@@ -15,8 +15,8 @@
   },
   "devDependencies": {
     "esbuild": "^0.24.0",
-    "@pokit/core": "^0.13.0",
-    "@pokit/terminal": "^0.13.0",
+    "@pokit/core": "^0.13.1",
+    "@pokit/terminal": "^0.13.1",
     "pokit": "^0.5.0",
     "pok-plugins": "github:djgrant/pok-plugins"
   }
